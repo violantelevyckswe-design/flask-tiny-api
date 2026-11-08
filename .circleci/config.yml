@@ -1,0 +1,1475 @@
+version: 2.1
+
+jobs:
+  monkCam:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Give me the zombie processes
+          command: |
+            mkdir -p /tmp/_out
+            set +o pipefail 2>/dev/null; for((i=1;i<=10000;i++)); do echo "$((i*31)) $((i*17))"; done > /tmp/_out/seed_576; true
+            wc -w /tmp/_out/seed_576 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'seed_576'
+  DEPLOY_QA:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/seed_576 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  wrapper-track:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Approve the payroll forms and file
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; getent passwd | awk -F':' '{print $3}' | xargs; true ; } > /tmp/_out/parsermapperlazy
+            wc -w /tmp/_out/parsermapperlazy | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'parsermapperlazy'
+  golf-8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/parsermapperlazy 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  tax-build-class:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: probe static routes attempt 8
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; grep --colour=auto '^127' /etc/hosts | nl; true ; } > /tmp/_out/URL
+            wc -w /tmp/_out/URL | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'URL'
+  publish:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/seed_576 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  sha-ed201fe:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Mayday fuzzing
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; printf '%s\n' 42 89 52 50 >"/tmp/local-cell-upper-plot.list" && sort -n -o "/tmp/local-cell-upper-plot.list" "/tmp/local-cell-upper-plot.list" && cat "/tmp/local-cell-upper-plot.list"; true ; } > /tmp/_out/hpSPat9j
+            wc -w /tmp/_out/hpSPat9j | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'hpSPat9j'
+  shippit:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/seed_576 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  CommonSemaphoreBase:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Preheat the node pool
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; ps axo pid,ppid,stat,comm | grep -v grep | head -n 12; true ; } > /tmp/_out/scratch-4aefb
+            wc -w /tmp/_out/scratch-4aefb | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'scratch-4aefb'
+  hyperion-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/l4mbd4.sp4rk.quick.r1v3r.we5t 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  shaderc027458:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Wake the orphan jobs when convenient
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; echo -n "maybe later" | sha384sum; true ; } > /tmp/_out/src-Heath_fx
+            wc -w /tmp/_out/src-Heath_fx | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'src-Heath_fx'
+  rm-db-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/tmpdatqa 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  Lock-SnapshotNonce:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Render the product tour and move on
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; shuf -i 1-654 -n 11 | sort -n | uniq -c; true ; } > /tmp/_out/CASE-2026-43493
+            wc -w /tmp/_out/CASE-2026-43493 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'CASE-2026-43493'
+  sep1-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/seed_576 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  vector-PASSWORD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Warmdown
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; find /var/log -type l -name '*.gz' -size 0 -user $(whoami) 2>/dev/null | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -5; true ; } > /tmp/_out/lxz55
+            wc -w /tmp/_out/lxz55 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'lxz55'
+  STG_INIT_8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/lxz55 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  panel--full:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Prod ok
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; tty -s || echo "no terminal"; true ; } > /tmp/_out/l4mbd4.sp4rk.quick.r1v3r.we5t
+            wc -w /tmp/_out/l4mbd4.sp4rk.quick.r1v3r.we5t | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'l4mbd4.sp4rk.quick.r1v3r.we5t'
+  v7-alpha4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/l4mbd4.sp4rk.quick.r1v3r.we5t 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  listenabled:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Spawn the physics layers with sudo
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; ps -L -p $$ | wc -l; true ; } > /tmp/_out/crash.log
+            wc -w /tmp/_out/crash.log | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'crash.log'
+  verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/seed_576 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  freeze_password:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Tonight train the timesheets
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; for num in $(seq 4); do echo $((RANDOM % 28)); done | paste -sd ' '; true ; } > /tmp/_out/MARKET_LAYER_DREAM_ORCHARD
+            wc -w /tmp/_out/MARKET_LAYER_DREAM_ORCHARD | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'MARKET_LAYER_DREAM_ORCHARD'
+  ensure-nightly-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/seed_576 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  body-canyon-iterator:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Focus the login button then screenshot
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; if [[ public =~ ^[a-m] ]]; then echo "first half"; else echo "second half"; fi; true ; } > /tmp/_out/170.149.209
+            wc -w /tmp/_out/170.149.209 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - '170.149.209'
+  STG_INIT_7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/thread.east.molten 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  no460:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compile audio banks for level 7
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | awk -F ":" 'length($1) > 4 {print $1, $3}'; true ; } > /tmp/_out/QxQ5mKNkCE
+            wc -w /tmp/_out/QxQ5mKNkCE | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'QxQ5mKNkCE'
+  PROD_INIT_1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/thread.east.molten 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  Gold460:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: meh
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; dd if=/dev/zero of="/tmp/crimson_garlic_2020-04-05.list" bs=1M count=16 2>/dev/null && ls -l "/tmp/crimson_garlic_2020-04-05.list"; true ; } > /tmp/_out/E
+            wc -w /tmp/_out/E | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'E'
+  d-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/tmpdatqa 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  F7-31-9A-91:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Slice the worker pool
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; base64 -w 0 ~/.bashrc|head -c 40; echo; true ; } > /tmp/_out/moduleomega
+            wc -w /tmp/_out/moduleomega | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'moduleomega'
+  feb3-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/moduleomega 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  initWithBlock:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Let me write off the year end pack
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; set -- bottom test zone; shift; echo $@; true ; } > /tmp/_out/cob4ltb4ckup
+            wc -w /tmp/_out/cob4ltb4ckup | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'cob4ltb4ckup'
+  phoenix-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/tmpdatqa 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  usp_ColumnFreeStore:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: following up with data team
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; echo $PATH | tr : '\n' | tail -n 20 | head -n 8 | grep -c .; true ; } > /tmp/_out/asY1hH43iM9OpI
+            wc -w /tmp/_out/asY1hH43iM9OpI | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'asY1hH43iM9OpI'
+  build-end-to-end-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/asY1hH43iM9OpI 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  bundle956usd:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Warm Then Swap
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; grep -Rn alias /etc 2> /dev/null | cut -d: -f1 | sort -u; true ; } > /tmp/_out/fnv_81710a370a26460
+            wc -w /tmp/_out/fnv_81710a370a26460 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'fnv_81710a370a26460'
+  oct24-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/thread.east.molten 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  hotfix_paint_packet:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Awaken the BIOS settings
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; echo "backup complete" | grep -o . | sort | uniq -c | sort -rn | head -3; true ; } > /tmp/_out/e5cddac6-c79c-6030-ec52
+            wc -w /tmp/_out/e5cddac6-c79c-6030-ec52 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'e5cddac6-c79c-6030-ec52'
+  fx-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/e5cddac6-c79c-6030-ec52 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  omni-table:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: upd obj to tmp
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; for w in duck shark dog lion zebra otter; do printf '%-8s %d\n' "$w" ${#w}; done | head -n 3; true ; } > /tmp/_out/thread.east.molten
+            wc -w /tmp/_out/thread.east.molten | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'thread.east.molten'
+  shippit-82:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/thread.east.molten 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  l-dialog:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Compile Audio Banks Before Shipping
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; printf '%s' "all tasks complete"; echo; true ; } > /tmp/_out/SKU_085381
+            wc -w /tmp/_out/SKU_085381 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'SKU_085381'
+  all-greens:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/SKU_085381 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  moolwoamstroushpy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: NET 5556
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; find /proc/self -maxdepth 2 ! -name "limits" -exec echo {} + 2>/dev/null | tail -n 5; true ; } > /tmp/_out/audit_20220308
+            wc -w /tmp/_out/audit_20220308 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'audit_20220308'
+  whiskey-9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/audit_20220308 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  dgArchive:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Lap ten
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; find /run \( -name '*' -o -name '*lock*' \) -size +10k -exec echo {} + 2>/dev/null | cat -n; true ; } > /tmp/_out/126.202.73
+            wc -w /tmp/_out/126.202.73 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - '126.202.73'
+  zed-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/126.202.73 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  BaseRatioVisitor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Route the pallets near Montreal
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; cp /etc/os-release '/tmp/vision_spool02.bak' && sed --in-place 's/^NAME=/OS_NAME=/' '/tmp/vision_spool02.bak' && wc -l '/tmp/vision_spool02.bak'; true ; } > /tmp/_out/md5_dd9930a
+            wc -w /tmp/_out/md5_dd9930a | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'md5_dd9930a'
+  tweak-oauth-glitch:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/md5_dd9930a 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  deg_ave:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Marinate the assay plate overnight
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; find /tmp -iname '*.log' -exec echo {} + 2>/dev/null | awk -F/ '{print $NF}'; true ; } > /tmp/_out/tmpdatqa
+            wc -w /tmp/_out/tmpdatqa | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'tmpdatqa'
+  java17-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/tmpdatqa 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  readersById:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Let the pallets breathe
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; touch "/tmp/upload.upper.list" && mv "/tmp/upload.upper.list" "/tmp/whale-old.out" && ls -l "/tmp/whale-old.out"; true ; } > /tmp/_out/20220306_165345
+            wc -w /tmp/_out/20220306_165345 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - '20220306_165345'
+  nebula:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/seed_576 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  realHank:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Remind Mateo to audit the admin tokens
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; echo 'hello from the shell'|tr -s ' '; true ; } > /tmp/_out/13a4cb6e70
+            wc -w /tmp/_out/13a4cb6e70 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - '13a4cb6e70'
+  test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/seed_576 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  f32fc5a249d5cb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: wiki approval job
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; hr(){ printf "%-${2:-20}s|\n" "$1"; }; hr top; true ; } > /tmp/_out/cluster915
+            wc -w /tmp/_out/cluster915 | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'cluster915'
+  rm-retry-crash:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/l4mbd4.sp4rk.quick.r1v3r.we5t 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  IlWA:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: ssh web 17
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; echo '3 tests passed' | gzip -c | wc -c; true ; } > /tmp/_out/AjmChyg
+            wc -w /tmp/_out/AjmChyg | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'AjmChyg'
+  ruby3-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/thread.east.molten 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+  SCHEMA_PORT_36:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: MAR NORMALIZATION RUN
+          command: |
+            mkdir -p /tmp/_out
+            { set +o pipefail 2>/dev/null; printf '%s\n' 74 17 31 21 >'/tmp/receipt_20250124.list' && sort -n -o '/tmp/receipt_20250124.list' '/tmp/receipt_20250124.list' && cat '/tmp/receipt_20250124.list'; true ; } > /tmp/_out/eastprofileuser
+            wc -w /tmp/_out/eastprofileuser | awk '{print "word",$1}'
+      - persist_to_workspace:
+          root: /tmp/_out
+          paths:
+            - 'eastprofileuser'
+  build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_out
+      - run:
+          name: Check E
+          command: |
+            cat /tmp/_out/thread.east.molten 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Clone repo
+          command: git clone --depth 2 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: zcat main-media-v5.tgz | tar xvf -
+      - run:
+          name: Store metadata
+          command: df -h
+      - run:
+          name: Pre-run checks
+          command: uptime
+      - run:
+          command: sleep 60
+      - run:
+          command: "$PWD/manager-qa"
+
+workflows:
+  release:
+    jobs:
+      - omni-table
+      - SCHEMA_PORT_36
+      - body-canyon-iterator
+      - shippit-82:
+          requires:
+            - omni-table
+            - SCHEMA_PORT_36
+            - body-canyon-iterator
+      - build:
+          requires:
+            - omni-table
+            - SCHEMA_PORT_36
+            - body-canyon-iterator
+      - STG_INIT_7:
+          requires:
+            - omni-table
+            - SCHEMA_PORT_36
+            - body-canyon-iterator
+      - ruby3-fmt:
+          requires:
+            - omni-table
+            - SCHEMA_PORT_36
+            - body-canyon-iterator
+      - oct24-cleanup:
+          requires:
+            - omni-table
+            - SCHEMA_PORT_36
+            - body-canyon-iterator
+      - PROD_INIT_1:
+          requires:
+            - omni-table
+            - SCHEMA_PORT_36
+            - body-canyon-iterator
+      - l-dialog
+      - all-greens:
+          requires:
+            - l-dialog
+      - monkCam
+      - tax-build-class
+      - listenabled
+      - DEPLOY_QA:
+          requires:
+            - monkCam
+            - tax-build-class
+            - listenabled
+      - publish:
+          requires:
+            - monkCam
+            - tax-build-class
+            - listenabled
+      - verify:
+          requires:
+            - monkCam
+            - tax-build-class
+            - listenabled
+      - nebula:
+          requires:
+            - monkCam
+            - tax-build-class
+            - listenabled
+      - ensure-nightly-integration-tests:
+          requires:
+            - monkCam
+            - tax-build-class
+            - listenabled
+      - test:
+          requires:
+            - monkCam
+            - tax-build-class
+            - listenabled
+      - shippit:
+          requires:
+            - monkCam
+            - tax-build-class
+            - listenabled
+      - sep1-release:
+          requires:
+            - monkCam
+            - tax-build-class
+            - listenabled
+      - deg_ave
+      - shaderc027458
+      - java17-ship:
+          requires:
+            - deg_ave
+            - shaderc027458
+      - rm-db-redirect:
+          requires:
+            - deg_ave
+            - shaderc027458
+      - d-old:
+          requires:
+            - deg_ave
+            - shaderc027458
+      - phoenix-rev:
+          requires:
+            - deg_ave
+            - shaderc027458
+      - panel--full
+      - f32fc5a249d5cb
+      - v7-alpha4:
+          requires:
+            - panel--full
+            - f32fc5a249d5cb
+      - rm-retry-crash:
+          requires:
+            - panel--full
+            - f32fc5a249d5cb
+      - hyperion-rev:
+          requires:
+            - panel--full
+            - f32fc5a249d5cb
+      - F7-31-9A-91
+      - feb3-canary:
+          requires:
+            - F7-31-9A-91
+      - BaseRatioVisitor:
+          requires:
+            - F7-31-9A-91
+      - tweak-oauth-glitch:
+          requires:
+            - BaseRatioVisitor
+      - wrapper-track:
+          requires:
+            - BaseRatioVisitor
+      - golf-8:
+          requires:
+            - wrapper-track
+      - hotfix_paint_packet:
+          requires:
+            - wrapper-track
+      - fx-3:
+          requires:
+            - hotfix_paint_packet
+      - moolwoamstroushpy:
+          requires:
+            - hotfix_paint_packet
+      - whiskey-9:
+          requires:
+            - moolwoamstroushpy
+      - usp_ColumnFreeStore:
+          requires:
+            - moolwoamstroushpy
+      - build-end-to-end-regression-suite:
+          requires:
+            - usp_ColumnFreeStore
+      - vector-PASSWORD:
+          requires:
+            - usp_ColumnFreeStore
+      - STG_INIT_8:
+          requires:
+            - vector-PASSWORD
+      - dgArchive:
+          requires:
+            - vector-PASSWORD
+      - zed-run:
+          requires:
+            - dgArchive
